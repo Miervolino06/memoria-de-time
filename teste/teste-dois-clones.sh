@@ -63,7 +63,7 @@ git clone -q --bare "$RAIZ" "$BASE/central.git"
 git clone -q "$BASE/central.git" "$BASE/ana"
 identidade "$BASE/ana" "Ana Teste" "ana@exemplo.com"
 cp -R "$CENARIO/semente/." "$BASE/ana/"
-git -C "$BASE/ana" add -A
+git -C "$BASE/ana" -c core.safecrlf=false add -A
 git -C "$BASE/ana" commit -qm "semente do cenário de teste"
 git -C "$BASE/ana" push -q
 SEMENTE=$(git -C "$BASE/ana" rev-parse HEAD)
@@ -88,7 +88,7 @@ uniao() { # dois commits simultâneos na mesma seção do índice
       "$p" "$p" "$p" > "$u/$p/memoria/empresa/fato-$p.md"
     awk -v l="- [Fato de $p](empresa/fato-$p.md) — teste de fusão ($p, 01/11/2026)" '{ print } /^## Empresa/ { print l }' \
       "$u/$p/memoria/INDICE.md" > "$u/indice.tmp" && mv "$u/indice.tmp" "$u/$p/memoria/INDICE.md"
-    git -C "$u/$p" add -A && git -C "$u/$p" commit -qm "memória de $p" || return 1
+    git -C "$u/$p" -c core.safecrlf=false add -A && git -C "$u/$p" commit -qm "memória de $p" || return 1
   done
   git -C "$u/p1" push -q && git -C "$u/p2" pull -q --rebase || return 1
   grep -q 'fato-p1.md' "$u/p2/memoria/INDICE.md" && grep -q 'fato-p2.md' "$u/p2/memoria/INDICE.md" && checador_ok "$u/p2"
