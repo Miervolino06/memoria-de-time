@@ -273,3 +273,7 @@ O desenho junta padrões que se repetem entre quem usa o Claude no trabalho em e
 (conector); o arquivo de passagem de bastão com objetivo, decisões, arquivos e pendências; o resumo de
 uma página no lugar do documento bruto; o `CLAUDE.md` curto escrito como lista do que não fazer; e a
 curadoria no lugar do acúmulo. O texto e os scripts deste repositório são próprios.
+
+## Licença
+
+MIT (ver `LICENSE`). Use, adapte e implante no seu time à vontade, mantendo o aviso de copyright.
