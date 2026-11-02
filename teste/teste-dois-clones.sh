@@ -108,6 +108,15 @@ cat > "$CONFIG" <<'JSON'
 JSON
 impressao_global() { cat "$HOME/.claude/CLAUDE.md" "$HOME/.claude/settings.json" 2>/dev/null | cksum; }
 GLOBAL_ANTES=$(impressao_global)
+# No Windows, aponta o Claude Code para o Git Bash (numa instalação padrão do Git ele acha sozinho).
+case "$(uname -s)" in
+  MINGW* | MSYS* | CYGWIN*)
+    if [ -z "${CLAUDE_CODE_GIT_BASH_PATH:-}" ] && command -v cygpath >/dev/null 2>&1; then
+      gb="$(cygpath -w /)bin\\bash.exe"
+      if [ -f "$(cygpath -u "$gb")" ]; then export CLAUDE_CODE_GIT_BASH_PATH="$gb"; fi
+    fi
+    ;;
+esac
 LIMITE=""
 if timeout --version 2>/dev/null | grep -q coreutils; then LIMITE="timeout $TEMPO"; fi
 PY=""
@@ -135,6 +144,7 @@ turno() { # turno <cópia> <prompt> [continua]
   (cd "$BASE/$copia" && $LIMITE claude -p "$(cat "$CENARIO/prompts/$nome.txt")" ${extra[@]+"${extra[@]}"} \
     --model "$MODELO" --setting-sources project,local --settings "$CONFIG" \
     --permission-mode acceptEdits --allowedTools "Bash(git *)" "Bash(bash scripts/checar-memoria.sh)" \
+    "PowerShell(git *)" "PowerShell(bash scripts/checar-memoria.sh)" \
     --output-format stream-json --verbose < /dev/null > "$BASE/logs/$nome.jsonl" 2> "$BASE/logs/$nome.err")
   rc=$?
   [ "$rc" -eq 0 ] || registra "AVISO   turno $nome saiu com código $rc: $(head -c 300 "$BASE/logs/$nome.err")"
