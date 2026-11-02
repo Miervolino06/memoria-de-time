@@ -1,0 +1,10 @@
+# Pessoal, nunca vai para o time
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Lixo de sistema e de editor
+.DS_Store
+Thumbs.db
+desktop.ini
+~$*
+*.tmp

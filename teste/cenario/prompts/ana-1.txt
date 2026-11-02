@@ -1,0 +1,12 @@
+Hoje (01/11/2026) tive uma call com a Construtora Horizonte e preciso começar a proposta deles. Minhas anotações da call:
+- Querem 30 escoras metálicas reguláveis de 3 m para a obra Residencial Ipê.
+- Quem decide e assina não é o Paulo: é a Marta, diretora financeira. A proposta vai endereçada a ela.
+- Teto de orçamento: R$ 48.000,00.
+- Precisam receber até 20/12/2026, no canteiro da obra (Rua das Acácias, 120, Campinas).
+- A Marta detesta proposta longa: no máximo 2 páginas.
+
+Outra coisa: o fornecedor mandou e-mail em 28/10/2026 baixando o preço da escora para R$ 1.250,00 por unidade em pedidos a partir de 25 unidades. A tabela do Drive (R$ 1.400,00) ainda não foi atualizada.
+
+Decidi oferecer pagamento à vista com 8% de desconto, em vez do parcelado em 3x, porque a Horizonte sempre paga à vista e o teto da Marta é apertado.
+
+Hoje só dá tempo de começar: monte o esqueleto da proposta em trabalho/propostas/construtora-horizonte.md, só com a apresentação e o escopo (o que vamos fornecer). Preço, prazo e condições ficam para amanhã com o Bruno, porque eu entro de férias amanhã.
