@@ -75,8 +75,8 @@ as respostas: siga para o próximo bloco.
 ## Depois
 
 - As respostas 10 a 12 costumam revelar trabalho que depende de uma pessoa só. Para cada item, ofereça
-  uma vez: "Quer que eu abra `empresa/processos/<slug>.md` para isso? Pode ser outro dia." Não abra
-  sem o sim.
+  uma vez: "Quer que eu abra `empresa/processos/<processo>.md` para isso? Pode ser outro dia." O nome
+  do arquivo é o do processo, não o da pessoa: o processo continua quando ela sai. Não abra sem o sim.
 - Proponha o commit: `git add pessoas/<slug>/aboutme.md` com a mensagem `aboutme: <Nome>` e pergunte
   "Posso commitar e enviar para o time?". Com o OK, faça o commit. Se houver remoto, rode
   `git pull --rebase` e depois `git push`. Sem remoto, diga que o commit ficou só nesta máquina.

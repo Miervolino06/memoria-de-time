@@ -97,8 +97,9 @@ confere "dois commits simultâneos no índice se fundem sem conflito" uniao
 
 if [ "$SEM_CLAUDE" -eq 1 ]; then resumo; fi
 
-# 3. Sessões do Claude. Sem o CLAUDE.md global e sem as configurações de usuário de quem roda o teste,
-# para simular outra pessoa; e sem permissão de mexer em ~/.claude.
+# 3. Sessões do Claude. Sem o CLAUDE.md global, sem as configurações de usuário e sem os conectores
+# da conta de quem roda o teste (Gmail, Drive...), para simular outra pessoa; e sem permissão de
+# mexer em ~/.claude.
 CONFIG="$BASE/config-teste.json"
 cat > "$CONFIG" <<'JSON'
 {
@@ -142,7 +143,7 @@ turno() { # turno <cópia> <prompt> [continua]
   if [ "${3:-}" = "continua" ]; then extra=(--continue); fi
   registra "...     turno $nome"
   (cd "$BASE/$copia" && $LIMITE claude -p "$(cat "$CENARIO/prompts/$nome.txt")" ${extra[@]+"${extra[@]}"} \
-    --model "$MODELO" --setting-sources project,local --settings "$CONFIG" \
+    --model "$MODELO" --setting-sources project,local --settings "$CONFIG" --strict-mcp-config \
     --permission-mode acceptEdits --allowedTools "Bash(git *)" "Bash(bash scripts/checar-memoria.sh)" \
     "PowerShell(git *)" "PowerShell(bash scripts/checar-memoria.sh)" \
     --output-format stream-json --verbose < /dev/null > "$BASE/logs/$nome.jsonl" 2> "$BASE/logs/$nome.err")
@@ -174,7 +175,7 @@ confere "Bruno: a primeira resposta já fala do trabalho da Horizonte" grep -qi 
 turno bruno bruno-2 continua
 P_BRUNO="$BASE/bruno/$PROPOSTA"
 confere "Bruno: total certo (30 x R\$ 1.250,00 - 8% = R\$ 34.500,00)" grep -q '34\.500' "$P_BRUNO"
-confere "Bruno: usou o preço do e-mail do fornecedor (R\$ 1.250,00)" grep -q '1\.250' "$P_BRUNO"
+confere "Bruno: usou o preço novo aprovado (R\$ 1.250,00), não o da tabela" grep -q '1\.250' "$P_BRUNO"
 confere "Bruno: prazo de entrega de 20/12/2026" grep -qE '20/12(/2026)?|20 de dezembro' "$P_BRUNO"
 confere "Bruno: proposta endereçada à Marta" grep -qi 'marta' "$P_BRUNO"
 sem_rastro_da_ana() {

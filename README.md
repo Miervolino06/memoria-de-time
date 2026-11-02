@@ -146,15 +146,21 @@ git -C memoria-do-time config user.name "Seu Nome"
 git -C memoria-do-time config user.email "seu.email@empresa.com"
 ```
 
-3. Abra o Claude Code na pasta `memoria-do-time`, aceite a confiança na pasta e rode `/aboutme`.
+3. Abra o Claude Code na pasta `memoria-do-time`, aceite a confiança na pasta e rode `/aboutme`. Sem
+   a confiança, o Claude Code ignora as permissões do `.claude/settings.json` e pede aprovação a cada
+   comando do git.
 
 Daí em diante, cada pessoa trabalha a partir desta pasta. O hook atualiza a cópia sozinho a cada
 sessão, e o `/encerrar-trabalho` envia as mudanças.
 
-**No Windows:** o hook é um script de shell. Se o Claude Code avisar "Git Bash wasn't found", aponte
-para o bash do Git na variável `CLAUDE_CODE_GIT_BASH_PATH` (por exemplo,
-`C:\Program Files\Git\bin\bash.exe`). Mesmo sem o hook, o `CLAUDE.md` manda o Claude rodar
-`git pull` quando o bloco "Memória do time" não aparece.
+**No Windows:** o hook é um script de shell, chamado como `bash .claude/hooks/inicio-de-sessao.sh`.
+Numa instalação padrão do Git for Windows, o Claude Code acha o Git Bash sozinho. Se ele avisar "Git
+Bash wasn't found" (acontece quando o Git foi instalado numa pasta fora do padrão), aponte para o
+bash do Git na variável `CLAUDE_CODE_GIT_BASH_PATH`, por exemplo `C:\Program Files\Git\bin\bash.exe`.
+Sem o Git Bash, o Claude Code roda o hook e os comandos no PowerShell. O hook continua funcionando se
+o `bash` estiver no PATH, e o `settings.json` já traz as mesmas permissões para a ferramenta
+PowerShell. Mesmo sem o hook, o `CLAUDE.md` manda o Claude rodar `git pull` quando o bloco "Memória
+do time" não aparece.
 
 ## Por que assim
 
@@ -201,8 +207,9 @@ Peça ao Claude: "faz a curadoria da memória". O roteiro é:
   barra os padrões mais comuns (chave privada, tokens de GitHub, AWS, Google, Slack e Anthropic, CPF
   formatado) e avisa sobre senha anotada. Ele não substitui o bom senso.
 - Para dar acesso a alguma coisa, o bastão diz **a quem pedir**, nunca a senha.
-- O Claude não faz commit nem push sem o OK da pessoa. Force push e `reset --hard` estão bloqueados
-  em `.claude/settings.json`.
+- O Claude não faz commit nem push sem o OK da pessoa: é regra do `CLAUDE.md` e das skills, e o push
+  ainda pede a aprovação do Claude Code. Force push, `reset --hard` e `git clean` estão bloqueados no
+  `.claude/settings.json`, com a flag em qualquer posição do comando.
 
 ## Drive e Teams
 
