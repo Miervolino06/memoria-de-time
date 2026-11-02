@@ -1,12 +1,12 @@
 # Resultado do teste de duas pessoas
 
-**Rodada de referência: 01/11/2026, commit `64c1feb`. 22 de 22 checagens passaram.** A Ana encerrou
+**Rodada de referência: 01/11/2026, commit `78d5f97`. 22 de 22 checagens passaram.** A Ana encerrou
 um trabalho. O Bruno, noutra cópia e noutra sessão, disse só "bom dia, o que eu tenho para hoje?" e
 "pode seguir até terminar", e entregou a proposta com o total certo, R$ 34.500,00. O controle negativo
 recebeu o mesmo arquivo de proposta, sem a memória e sem o bastão, e chegou a R$ 42.000,00, com a
 tabela de preços velha.
 
-**Confirmação: 01/11/2026, commit `d5096ca` (o atual, com as sessões sem conectores). De novo 22 de
+**Confirmação: 01/11/2026, commit `366e914` (o do script atual, com as sessões sem conectores). De novo 22 de
 22**, com o mesmo contraste: R$ 34.500,00 no Bruno e R$ 42.000,00 no controle.
 
 Todos os números abaixo são do cenário fictício do teste (`teste/cenario/`).
@@ -17,7 +17,7 @@ Todos os números abaixo são do cenário fictício do teste (`teste/cenario/`).
   (`claude -p --model sonnet`).
 - Cada pessoa tem a sua cópia, e as cópias se ligam por um repositório central local (`git clone --bare`).
 - As sessões não carregam o `CLAUDE.md` global nem as configurações de usuário de quem roda o teste,
-  e não podem escrever em `~/.claude`. A partir do commit `d5096ca`, também rodam sem os conectores
+  e não podem escrever em `~/.claude`. A partir do commit `366e914`, também rodam sem os conectores
   da conta (ver "O que a rodada de referência ensinou").
 
 ## O que cada pessoa recebeu
@@ -112,7 +112,7 @@ Houve uma primeira rodada, interrompida, antes da de referência:
 4. **Na rodada de referência, o Bruno tentou o Gmail de verdade.** Para conferir o e-mail do preço, o
    Claude dele chamou o conector do Gmail da conta de quem rodava o teste. A permissão negou e nenhum
    e-mail foi lido. Para o produto é o comportamento certo (conferir o que não foi verificado). Para o
-   teste, não: desde o commit `d5096ca` as sessões rodam com `--strict-mcp-config`, sem conector nenhum.
+   teste, não: desde o commit `366e914` as sessões rodam com `--strict-mcp-config`, sem conector nenhum.
 
 ## Teste à parte: a entrevista `/aboutme` (9 de 9)
 
