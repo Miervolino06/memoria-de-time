@@ -251,7 +251,9 @@ Sem o Claude, só a parte mecânica (hook, checador, fusão do índice):
 bash teste/teste-dois-clones.sh --sem-claude
 ```
 
-O resultado da última rodada fica em `teste/RESULTADO.md`.
+Na rodada de referência (01/11/2026), as 22 checagens passaram: o Bruno chegou a R$ 34.500,00 só
+pelo bastão e pela memória, e o controle, só com o arquivo, chegou a R$ 42.000,00, com a tabela de
+preços velha. O detalhe, com o que não foi verificado, está em `teste/RESULTADO.md`.
 
 ## Limites conhecidos
 
